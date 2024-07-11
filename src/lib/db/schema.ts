@@ -1,4 +1,5 @@
-import { pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
+import { pgTable, text, timestamp, integer, serial } from 'drizzle-orm/pg-core';
 
 export const auth_user = pgTable('auth_user', {
 	id: text('id').primaryKey(),
@@ -14,7 +15,22 @@ export const user_session = pgTable('user_session', {
 		.references(() => auth_user.id)
 });
 
+export const verifyCode = pgTable('verifyCode', {
+	id: text('id').primaryKey(),
+	creator: text('creator_id').notNull(),
+	uses: integer('uses').default(0).notNull(),
+	max: integer('max_uses').default(0).notNull()
+});
 
+export const posts = pgTable('posts', {
+	id: serial('id').primaryKey(),
+	author: text('author_id').notNull(),
+	title: text('title').notNull(),
+	desc: text('description').default(''),
+	timestamp: timestamp('timestamp', { mode: 'date' })
+		.notNull()
+		.default(sql`now()`)
+});
 
 export const sampleTable = pgTable('sample', {
 	id: text('id').primaryKey(),

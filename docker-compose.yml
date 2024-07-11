@@ -1,11 +1,10 @@
 services:
-  db:
+  wmkitDB:
     image: postgres
     restart: always
     environment:
       POSTGRES_USER: '${PG_USER}'
       POSTGRES_PASSWORD: '${PG_PASSWORD}'
-      AUTH_DB_NAME: '${AUTH_DB_NAME}'
       DB_NAME: '${DB_NAME}'
     volumes:
       - ./pgdata:/var/lib/postgresql/data
