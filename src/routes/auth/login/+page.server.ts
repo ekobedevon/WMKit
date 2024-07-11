@@ -1,11 +1,11 @@
-// routes/login/+page.server.ts
+
 import { lucia } from '$lib/server/auth';
 import { fail, redirect } from '@sveltejs/kit';
 import { Argon2id } from 'oslo/password';
 
 import type { Actions } from './$types';
 import { eq } from 'drizzle-orm';
-import { authDB } from '$lib/db/db.server';
+import { dataDB } from '$lib/db/db.server';
 import { auth_user } from '$lib/db/schema';
 
 type User = {
@@ -35,7 +35,7 @@ export const actions: Actions = {
 				message: 'Invalid password'
 			});
 		}
-        const existingUser = await authDB.select().from(auth_user).where(eq(auth_user.username,username.toLowerCase()))
+        const existingUser = await dataDB.select().from(auth_user).where(eq(auth_user.username,username.toLowerCase()))
 
 
 		if (!existingUser[0]) {

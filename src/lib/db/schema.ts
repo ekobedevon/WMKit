@@ -1,10 +1,13 @@
 import { sql } from 'drizzle-orm';
-import { pgTable, text, timestamp, integer, serial } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, integer, serial, pgEnum } from 'drizzle-orm/pg-core';
+
+export const roleEnum = pgEnum('roles', ['Admin', 'Moderator', 'GM', 'Player']);
 
 export const auth_user = pgTable('auth_user', {
 	id: text('id').primaryKey(),
 	username: text('username'),
-	hashed_password: text('hashed_password')
+	hashed_password: text('hashed_password'),
+	role:roleEnum('role').notNull().default('Player')
 });
 
 export const user_session = pgTable('user_session', {
@@ -15,7 +18,7 @@ export const user_session = pgTable('user_session', {
 		.references(() => auth_user.id)
 });
 
-export const verifyCode = pgTable('verifyCode', {
+export const verifyCode = pgTable('invites', {
 	id: text('id').primaryKey(),
 	creator: text('creator_id').notNull(),
 	uses: integer('uses').default(0).notNull(),

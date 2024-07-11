@@ -72,5 +72,11 @@
 				>
 			</div>
 		</form>
+		<p class="mt-10 text-center text-sm text-gray-500">
+			Already a member?
+			<a href="/auth/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+				>Login</a
+			>
+		</p>
 	</div>
 </div>
