@@ -6,7 +6,6 @@ import { Argon2id } from 'oslo/password';
 import { dataDB } from '$lib/db/db.server';
 import { auth_user } from '$lib/db/schema';
 
-
 import type { Actions } from './$types';
 
 export const actions: Actions = {
@@ -17,10 +16,10 @@ export const actions: Actions = {
 		const verifyCode = formData.get('code') as string;
 		// username must be between 4 ~ 31 characters, and only consists of lowercase letters, 0-9, -, and _
 		// keep in mind some database (e.g. mysql) are case insensitive
-		
-		const valid = await codeCheck(verifyCode)
 
-		if(valid){
+		const valid = await codeCheck(verifyCode);
+
+		if (valid) {
 			if (
 				typeof username !== 'string' ||
 				username.length < 3 ||
@@ -56,7 +55,7 @@ export const actions: Actions = {
 				...sessionCookie.attributes
 			});
 
-			redirect(302, '/');
+			redirect(302, '/kit');
 		}
 		return fail(400, {
 			message: 'Invalid Code'
