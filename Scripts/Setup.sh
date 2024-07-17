@@ -15,7 +15,10 @@ CREATE TABLE auth_user (
     id TEXT PRIMARY KEY,
     username TEXT,
     hashed_password TEXT,
-    role roles NOT NULL DEFAULT 'Player'
+    display TEXT NOT NULL,
+    role roles NOT NULL DEFAULT 'Player',
+    icon TEXT NOT NULL DEFAULT 'goblin-head',
+    pronouns TEXT NOT NULL DEFAULT ''
 );
 
 -- Create the 'user_session' table

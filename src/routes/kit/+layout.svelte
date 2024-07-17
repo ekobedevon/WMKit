@@ -1,4 +1,10 @@
-<script>
+<script lang='ts'>
+	import Nav from "$lib/components/nav.svelte";
+	export let data:any
+	let userData
+	$: userData = data ? data : undefined
 </script>
 
-<slot />
+<Nav {userData}>
+	<slot />
+</Nav>

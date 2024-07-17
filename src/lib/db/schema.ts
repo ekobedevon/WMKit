@@ -7,7 +7,10 @@ export const auth_user = pgTable('auth_user', {
 	id: text('id').primaryKey(),
 	username: text('username'),
 	hashed_password: text('hashed_password'),
-	role:roleEnum('role').notNull().default('Player')
+	display: text('display').notNull(),
+	role: roleEnum('role').notNull().default('Player'),
+	icon: text('icon').notNull().default('goblin-head'),
+	pronouns: text('pronouns').notNull().default('')
 });
 
 export const user_session = pgTable('user_session', {
@@ -27,7 +30,9 @@ export const verifyCode = pgTable('invites', {
 
 export const posts = pgTable('posts', {
 	id: serial('id').primaryKey(),
-	author: text('author_id').notNull(),
+	author: text('author_id')
+		.notNull()
+		.references(() => auth_user.id),
 	title: text('title').notNull(),
 	desc: text('description').default(''),
 	timestamp: timestamp('timestamp', { mode: 'date' })

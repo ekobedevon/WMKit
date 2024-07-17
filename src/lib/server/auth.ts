@@ -18,7 +18,10 @@ export const lucia = new Lucia(adapter, {
 		return {
 			// attributes has the type of DatabaseUserAttributes
 			username: attributes.username,
-			role:attributes.role
+			display: attributes.display,
+			role: attributes.role,
+			icon: attributes.icon,
+			pronouns: attributes.pronouns
 		};
 	}
 });
@@ -32,7 +35,10 @@ declare module 'lucia' {
 
 interface DatabaseUserAttributes {
 	username: string;
-	role:string;
+	display: string;
+	role: string;
+	icon: string;
+	pronouns: string;
 }
 
 export const createCode = async (id: string, max_uses: number) => {

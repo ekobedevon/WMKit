@@ -5,6 +5,8 @@ import { generateId } from 'lucia';
 import { Argon2id } from 'oslo/password';
 import { dataDB } from '$lib/db/db.server';
 import { auth_user } from '$lib/db/schema';
+import { count, generate } from 'random-words';
+import { nanoid } from 'nanoid';
 
 import type { Actions } from './$types';
 
@@ -38,6 +40,11 @@ export const actions: Actions = {
 
 			const userId = generateId(15);
 			const hashedPassword = await new Argon2id().hash(password);
+			const display = generate({
+				exactly: 2,
+				join: '',
+				seed: userId
+			});
 			const baseRole =
 				((await codeCheck(verifyCode)) && verifyCode) === 'ADMIN' ? 'Admin' : 'Player';
 			// TODO: check if username is already used
@@ -45,7 +52,8 @@ export const actions: Actions = {
 				id: userId,
 				username: username.toLowerCase(),
 				hashed_password: hashedPassword,
-				role: baseRole
+				role: baseRole,
+				display: `${display}${nanoid(4)}`
 			});
 
 			const session = await lucia.createSession(userId, {});
