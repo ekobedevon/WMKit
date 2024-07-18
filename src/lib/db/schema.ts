@@ -64,8 +64,9 @@ export const characters = pgTable('characters', {
 		.notNull()
 		.references(() => auth_user.id),
 	name: text('name').notNull(),
-	level: integer('level').default(0),
-	desc: text('description').default(''),
+	pronouns:text('pronouns').notNull(),
+	level: integer('level').default(0).notNull(),
+	desc: text('description').default('').notNull(),
 	timestamp: timestamp('timestamp', { mode: 'date' })
 		.notNull()
 		.default(sql`now()`)

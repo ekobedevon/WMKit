@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let data: any;
 	import Icon from '@iconify/svelte';
-	let current = data.icon;
+	let current = data.userData.icon;
 	import { enhance } from '$app/forms';
 	const items = [
 		'barbarian',
@@ -41,7 +41,7 @@
 		<div class="border-b border-gray-900/10 pb-12">
 			<h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
 			<p class="mt-1 text-sm leading-6 text-gray-600">
-				This information will be displayed publicly so be careful what you share.
+				This information will be displayed publicly.
 			</p>
 
 			<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -59,7 +59,7 @@
 								id="display"
 								class=" block flex-1 border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 								placeholder="joemama"
-								bind:value={data.display}
+								bind:value={data.userData.display}
 							/>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 								id="pronouns"
 								class=" block flex-1 border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 								placeholder="They/Them"
-								bind:value={data.pronouns}
+								bind:value={data.userData.pronouns}
 							/>
 						</div>
 					</div>

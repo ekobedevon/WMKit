@@ -50,7 +50,7 @@ CREATE TABLE games (
     id TEXT PRIMARY KEY,
     author_id TEXT NOT NULL REFERENCES auth_user(id),
     gm_id TEXT NOT NULL REFERENCES auth_user(id),
-    status TEXT NOT NULL
+    status TEXT NOT NULL,
     min_level INT DEFAULT 0,
     max_level INT DEFAULT 100,
     title TEXT NOT NULL,
@@ -63,6 +63,7 @@ CREATE TABLE games (
 CREATE TABLE characters (
     id TEXT PRIMARY KEY,
     owner_id TEXT NOT NULL REFERENCES auth_user(id),
+    pronouns TEXT NOT NULL,
     name TEXT NOT NULL,
     level INT DEFAULT 0,
     description TEXT DEFAULT '',

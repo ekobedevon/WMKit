@@ -2,7 +2,7 @@
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
 	export let data: PageData;
-	console.log(data);
+	let { character } = data;
 </script>
 
 <form use:enhance method="post" class="">
@@ -29,7 +29,7 @@
 								id="name"
 								class=" block flex-1 border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
 								placeholder="joe mama"
-								value=""
+								bind:value={character.name}
 							/>
 						</div>
 					</div>
@@ -46,7 +46,7 @@
 								name="pronouns"
 								id="pronouns"
 								class=" block flex-1 border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-								placeholder="They/Them"
+								bind:value={character.pronouns}
 							/>
 						</div>
 					</div>
@@ -62,6 +62,7 @@
 								id="about"
 								name="about"
 								rows="3"
+								bind:value={character.desc}
 								class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 							></textarea>
 						</div>
@@ -80,7 +81,7 @@
 								name="level"
 								id="level"
 								class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-								value="1"
+								bind:value={character.level}
 							/>
 						</div>
 					</div>

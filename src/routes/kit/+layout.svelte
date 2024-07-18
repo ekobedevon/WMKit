@@ -3,8 +3,8 @@
 	export let data: any;
 	let userData;
 	$: userData = data ? data.userData : undefined;
-	const characterData = data.characterData;
-	console.log(characterData)
+	let characterData;
+	$: characterData = data ? data.characterData : undefined;
 </script>
 
 <Nav {userData} {characterData}>

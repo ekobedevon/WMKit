@@ -15,7 +15,7 @@
 		display: string;
 	};
 	import Links from './links.svelte';
-	export let characterData: character[];
+	export let characterData: any[];
 	export let userData: user;
 	let show = false;
 	type Link = { icon: string; text: string; dest: string };
@@ -107,13 +107,16 @@
 									</ul>
 								</li>
 								<li>
-									<div class="text-xs font-semibold leading-6 text-gray-400">Your Characters</div>
+									<div class="">
+										<div class="text-xs font-semibold leading-6 text-gray-400">Your Characters</div>
+										<a href="/"><span class="new character">new character</span></a>
+									</div>
 									<ul role="list" class="-mx-2 mt-2 space-y-1">
 										{#each characterData as character}
 											<li>
 												<!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
 												<a
-													href="/kit/home"
+													href={`/kit/characters/view/${character.id}`}
 													class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
 												>
 													<span
@@ -155,13 +158,19 @@
 						</ul>
 					</li>
 					<li>
-						<div class="text-xs font-semibold leading-6 text-gray-400">Your Characters</div>
+						<div class="flex justify-between items-center text-gray-400">
+							<div class="text-xs font-semibold leading-6">Your Characters</div>
+							<a href="/kit/characters/new" class="hover:text-indigo-600"
+								><span class="sr-only">new character</span>
+								<Icon icon="heroicons:user-plus" class="text-2xl " />
+							</a>
+						</div>
 						<ul role="list" class="-mx-2 mt-2 space-y-1">
 							{#each characterData as character}
 								<li>
 									<!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
 									<a
-										href="/kit/home"
+										href={`/kit/characters/view/${character.id}`}
 										class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
 									>
 										<span

@@ -16,9 +16,11 @@ export const actions: Actions = {
 		const pronouns = formData.get('pronouns') as string;
 		const about = formData.get('about') as string;
 		const levelString = formData.get('level') as string;
-		const level = parseInt(levelString)
+		const level = parseInt(levelString);
 		try {
-			await dataDB.insert(characters).values({id:nanoid(),owner:id,name,level,desc:about})
+			await dataDB
+				.insert(characters)
+				.values({ id: nanoid(), owner: id, name, level, desc: about, pronouns });
 		} catch (error) {
 			console.error('Error update profile:', error);
 		}
