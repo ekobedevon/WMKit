@@ -7,7 +7,6 @@ import type { PageServerLoad, Actions, RequestEvent } from './$types';
 export const load = (async (event) => {
 	if (!event.locals.user) redirect(302, '/kit/home');
 	const userID = event.locals.user?.id;
-	console.log(event.params.id);
 	const charactersData = await dataDB
 		.select()
 		.from(characters)

@@ -2,7 +2,7 @@
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
 	export let data: PageData;
-	console.log(data);
+
 </script>
 
 <form use:enhance method="post" class="">
