@@ -40,7 +40,64 @@ export const posts = pgTable('posts', {
 		.default(sql`now()`)
 });
 
-export const sampleTable = pgTable('sample', {
+export const games = pgTable('games', {
+	id: serial('id').primaryKey(),
+	author: text('author_id')
+		.notNull()
+		.references(() => auth_user.id),
+	gm: text('gm_id')
+		.notNull()
+		.references(() => auth_user.id),
+	min: integer('min_level').default(0),
+	max: integer('max_level').default(100),
+	title: text('title').notNull(),
+	desc: text('description').default(''),
+	selection: text('selection').default('First'),
+	timestamp: timestamp('timestamp', { mode: 'date' })
+		.notNull()
+		.default(sql`now()`)
+});
+
+export const characters = pgTable('characters', {
 	id: text('id').primaryKey(),
-	name: text('name').notNull()
+	owner: text('owner_id')
+		.notNull()
+		.references(() => auth_user.id),
+	name: text('name').notNull(),
+	level: integer('level').default(0),
+	desc: text('description').default(''),
+	timestamp: timestamp('timestamp', { mode: 'date' })
+		.notNull()
+		.default(sql`now()`)
+});
+
+export const signup = pgTable('signup', {
+	id: text('id').primaryKey(),
+	owner: text('owner_id')
+		.notNull()
+		.references(() => auth_user.id),
+	game: text('game_id')
+		.notNull()
+		.references(() => games.id),
+	character: text('character_id')
+		.notNull()
+		.references(() => characters.id),
+	desc: text('description').default(''),
+	timestamp: timestamp('timestamp', { mode: 'date' })
+		.notNull()
+		.default(sql`now()`)
+});
+
+export const comments = pgTable('comments', {
+	id: serial('id').primaryKey(),
+	owner: text('owner_id')
+		.notNull()
+		.references(() => auth_user.id),
+	post: text('post_id')
+		.notNull()
+		.references(() => games.id),
+	desc: text('description').notNull(),
+	timestamp: timestamp('timestamp', { mode: 'date' })
+		.notNull()
+		.default(sql`now()`)
 });

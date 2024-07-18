@@ -1,5 +1,13 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
+	type character = {
+		id: string;
+		name: string;
+		owner: string;
+		level: number | null;
+		desc: string | null;
+		timestamp: Date;
+	}[];
 	type user = {
 		icon: string;
 		username: string;
@@ -7,6 +15,7 @@
 		display: string;
 	};
 	import Links from './links.svelte';
+	export let characterData: character[];
 	export let userData: user;
 	let show = false;
 	type Link = { icon: string; text: string; dest: string };
@@ -15,7 +24,6 @@
 		{ icon: 'calendar', text: 'Calender', dest: '/kit/games' },
 		{ icon: 'chat-bubble-left-right', text: 'Posts', dest: '/kit/posts' }
 	];
-	
 </script>
 
 <!--
@@ -99,45 +107,23 @@
 									</ul>
 								</li>
 								<li>
-									<div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+									<div class="text-xs font-semibold leading-6 text-gray-400">Your Characters</div>
 									<ul role="list" class="-mx-2 mt-2 space-y-1">
-										<li>
-											<!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-											<a
-												href="/kit/home"
-												class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-											>
-												<span
-													class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600"
-													>H</span
+										{#each characterData as character}
+											<li>
+												<!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
+												<a
+													href="/kit/home"
+													class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
 												>
-												<span class="truncate">Heroicons</span>
-											</a>
-										</li>
-										<li>
-											<a
-												href="/kit/home"
-												class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-											>
-												<span
-													class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600"
-													>T</span
-												>
-												<span class="truncate">Tailwind Labs</span>
-											</a>
-										</li>
-										<li>
-											<a
-												href="/kit/home"
-												class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-											>
-												<span
-													class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600"
-													>W</span
-												>
-												<span class="truncate">Workcation</span>
-											</a>
-										</li>
+													<span
+														class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600"
+														>{Array.from(character.name)[0]}</span
+													>
+													<span class="truncate">{character.name}</span>
+												</a>
+											</li>
+										{/each}
 									</ul>
 								</li>
 							</ul>
@@ -169,51 +155,29 @@
 						</ul>
 					</li>
 					<li>
-						<div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+						<div class="text-xs font-semibold leading-6 text-gray-400">Your Characters</div>
 						<ul role="list" class="-mx-2 mt-2 space-y-1">
-							<li>
-								<!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-								<a
-									href="/kit/home"
-									class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-								>
-									<span
-										class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600"
-										>H</span
+							{#each characterData as character}
+								<li>
+									<!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
+									<a
+										href="/kit/home"
+										class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
 									>
-									<span class="truncate">Heroicons</span>
-								</a>
-							</li>
-							<li>
-								<a
-									href="/kit/home"
-									class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-								>
-									<span
-										class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600"
-										>T</span
-									>
-									<span class="truncate">Tailwind Labs</span>
-								</a>
-							</li>
-							<li>
-								<a
-									href="/kit/home"
-									class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-								>
-									<span
-										class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600"
-										>W</span
-									>
-									<span class="truncate">Workcation</span>
-								</a>
-							</li>
+										<span
+											class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600"
+											>{Array.from(character.name)[0]}</span
+										>
+										<span class="truncate">{character.name}</span>
+									</a>
+								</li>
+							{/each}
 						</ul>
 					</li>
-					<li class="-mx-6 mt-auto">
+					<li class="-mx-6 mt-auto flex">
 						<a
 							href="/kit/profile"
-							class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+							class=" flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50 flex-1"
 						>
 							<Icon icon={`game-icons:${userData.icon}`} class="text-5xl" />
 							<!-- <img
@@ -223,6 +187,18 @@
 							/> -->
 							<span class="sr-only">Your profile</span>
 							<span aria-hidden="true" class="">{userData.display}</span>
+						</a>
+						<a
+							href="/auth/signout"
+							class=" flex items-center gap-x-4 px-3 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+						>
+							<Icon icon={`heroicons:arrow-right-end-on-rectangle`} class="text-4xl" />
+							<!-- <img
+								class="h-8 w-8 rounded-full bg-gray-50"
+								src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+								alt=""
+							/> -->
+							<span class="sr-only">Sign Out</span>
 						</a>
 					</li>
 				</ul>
